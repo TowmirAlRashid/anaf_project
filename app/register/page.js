@@ -1,9 +1,24 @@
-import { Box, Typography } from "@mui/material";
+"use client";
+
+import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import CustomInput from "../ui/CustomInput";
 
-const register = () => {
+const Register = () => {
+  const [inputData, setInputData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    fiverrLink: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputData);
+  };
+
   return (
     <Box
       sx={{
@@ -52,7 +67,11 @@ const register = () => {
         </Box>
 
         {/* the form */}
-        <Box sx={{ width: "100%", height: "100%" }}>
+        <Box
+          sx={{ width: "100%", height: "100%" }}
+          component="form"
+          onSubmit={handleSubmit}
+        >
           <Typography
             sx={{
               textAlign: "center",
@@ -77,11 +96,55 @@ const register = () => {
             Sign Up to create your account
           </Typography>
 
-          <CustomInput inputType="text" placeholderText="First Name" />
+          <CustomInput
+            inputType="text"
+            placeholderText="First Name"
+            setInputData={setInputData}
+            stateProp="firstName"
+          />
+          <CustomInput
+            inputType="text"
+            placeholderText="Last Name"
+            setInputData={setInputData}
+            stateProp="lastName"
+          />
+          <CustomInput
+            inputType="text"
+            placeholderText="Email"
+            setInputData={setInputData}
+            stateProp="email"
+          />
+          <CustomInput
+            inputType="password"
+            placeholderText="Password"
+            setInputData={setInputData}
+            stateProp="password"
+          />
+          <CustomInput
+            inputType="text"
+            placeholderText="Fiverr Website"
+            setInputData={setInputData}
+            stateProp="fiverrLink"
+          />
+
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              width: "100%",
+              height: "2.6rem",
+              backgroundColor: "#0A4227",
+              "&:hover": {
+                backgroundColor: "#0A4227",
+              },
+            }}
+          >
+            submit
+          </Button>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default register;
+export default Register;
